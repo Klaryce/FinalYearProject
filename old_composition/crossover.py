@@ -8,6 +8,7 @@ from helpfuncs import bitdecoding
 from selectbest import alpha
 
 def crossVarsA(N, neighbors, S1, S2):
+    startT = time.time()
     # if len(N) != len(S1) or len(N) != len(S2):
     #     return False
     V1 = [i for i in range(len(N))]
@@ -67,10 +68,14 @@ def crossVarsA(N, neighbors, S1, S2):
         # G-consistent
         ppc(S, neighbors) #path consistency on the initial graph (partial)
         
+    passT = time.time() - startT
+    globs["cross_total"] = globs["cross_total"] + passT
+    globs["cross_num"] += 1
     return S
 
 
 def crossVarsB(N, neighbors, S1, S2):
+    startT = time.time()
     # if len(N) != len(S1) or len(N) != len(S2):
     #     return False
     V1 = [i for i in range(len(N))]
@@ -146,9 +151,13 @@ def crossVarsB(N, neighbors, S1, S2):
         # G-consistent
         ppc(S, neighbors) #path consistency on the initial graph (partial)
         
+    passT = time.time() - startT
+    globs["cross_total"] = globs["cross_total"] + passT
+    globs["cross_num"] += 1
     return S
 
 def crossVarsC(N, neighbors, S1, S2):
+    startT = time.time()
     # if len(N) != len(S1) or len(N) != len(S2):
     #     return False
     V1 = [i for i in range(len(N))]
@@ -216,10 +225,13 @@ def crossVarsC(N, neighbors, S1, S2):
         # G-consistent
         ppc(S, neighbors) #path consistency on the initial graph (partial)
         
+    passT = time.time() - startT
+    globs["cross_total"] = globs["cross_total"] + passT
+    globs["cross_num"] += 1
     return S
 
 def crossConsA(N, neighbors, S1, S2):
-
+    startT = time.time()
     n = globs["size"]
     Id = 0
     from bitcoding import B_dict
@@ -278,6 +290,9 @@ def crossConsA(N, neighbors, S1, S2):
         # G-consistent
         ppc(S, neighbors) #path consistency on the initial graph (partial)
     # print(ConMatrix)
+    passT = time.time() - startT
+    globs["cross_total"] = globs["cross_total"] + passT
+    globs["cross_num"] += 1
     return S
 
 def crossConsB(N, neighbors, S1, S2):
