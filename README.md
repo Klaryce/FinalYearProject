@@ -1,7 +1,7 @@
 # FinalYearProject
 The folder new_composition is the code package using the new version of composition handling, while the old_composition is the code package using the original (old) version of compositin handling.
 
-Enter the command "python mainfuncs.py" to run the code. The version of the code is Python 3. The command python3 is expected to be used if the default version of the command "python" is 2.
+Enter the command "python mainfuncs.py" to run the code. The version of the code is Python 3. The command "python 3" is expected to be used if the default version of the command "python" is 2.
 
 
 Available parameters:
