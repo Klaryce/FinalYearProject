@@ -6,7 +6,7 @@ Enter the command "python mainfuncs.py" to run the code. The version of the code
 
 Available parameters:
 
--f: input filename. String. Default: size16-edges8-9QCNsconsistent.
+-f: filename of the input QCNs. String. Default: size16-edges8-9QCNsconsistent.
 
 -o: crossover operator. String. Default: crossConsB.
 
