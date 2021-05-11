@@ -42,4 +42,4 @@ In each folder, a folder named using the parameter -n will be created. Then, sub
 
 If a folder has been created already, it will not be created again. And the results will be put into it.
 
-There are different versions of the code package and the current package is the last one which changes the code structure a lot. Please contact the student immediately if the current version of the code package cannot run successfully. Many thanks.
+There are different versions of the code package and the current package is the last one which changes the code structure a lot. Please contact the student immediately if the current version of the code package cannot run successfully. Many thanks. Email: klaryce@qq.com.
