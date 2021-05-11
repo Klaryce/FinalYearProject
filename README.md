@@ -2,16 +2,26 @@
 The folder new_composition is the code package using the new version of composition handling.
 The old_composition is the code package using the original (old) version of compositin handling.
 
-Enter the command "python mainfuncs.py" to run the code.
+Enter the command "python mainfuncs.py" to run the code. The version of the code is Python 3. The command python3 is expected to be used if the default version of the command "python" is 2.
 
 Available parameters:
--f: input filename. String. Default: size16-edges8-9QCNsconsistent
--o: crossover operator. String. Default: crossConsB
--p: cardP, the size of the population. Integer. Default: 50
--b: cardBest, the number of best individuals selected. Integer. Default: 20
--d: divT, number of loops to enter the diversification step. Integer. Default: 50
--t: timeoutL, the time out limit of the algorithm EAMQ. Integer. Default: 1800
--n: name of the experiment. String. Default: default
--c: the parameter c in operator crossConsC. Integer. Default: 7
--r: output triangulation.
+-f: input filename. String. Default: size16-edges8-9QCNsconsistent. 
+-o: crossover operator. String. Default: crossConsB. 
+-p: cardP, the size of the population. Integer. Default: 50. 
+-b: cardBest, the number of best individuals selected. Integer. Default: 20. 
+-d: divT, number of loops to enter the diversification step. Integer. Default: 50. 
+-t: timeoutL, the time out limit of the algorithm EAMQ. Integer. Default: 1800. 
+-n: name of the experiment. String. Default: default. 
+-c: the parameter c in operator crossConsC. Integer. Default: 7. 
+-r: output chordal graphs. 
 -i: output each input QCN to a single file.
+
+The folder QCN-Files contains the input files of the algorithm. When using the -f command to specify a input file, the algorithm will search the filename within this folder. 
+The algorithm will create a folder Results which contains the solutions and some information.
+The algorithm will also create folder LoopsInfo containing information of each loop.
+If the parameter -r is set, the folder Triangulation will be created to contain chordal graphs.
+If the parameter -i is set, the folder Input_SingleQCNs will be created to contain the seperate files of the input QCNs.
+
+In each folder, a folder named using the parameter -n will be created. Then, sub-directories named using configurations of QCNs, or parameters of the algorithm will be created to contain the results and information of corresponding QCNs.
+
+If a folder has been created already, it will not be created again. And the results will be put into it.
