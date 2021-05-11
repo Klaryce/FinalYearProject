@@ -21,7 +21,7 @@ def init(buffer, inputQCN_dir, operator, otpt):
     N = fileLen("allen.relations")
     setGlobals("size", N)
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if N <= 8:
@@ -56,14 +56,6 @@ def main(argv=None):
     parser = OptionParser()
     
     # set parsing options
-    # parser.add_option("-c", "--calculus", type="string", dest="calc", default="rcc8", help="interaction mode: rcc8, or allen [default: %default]")
-    # parser.add_option("-m", "--method", type="string", dest="method", default="iterative", help="interaction mode: recursive, or iterative [default: %default]")
-    # parser.add_option("-p", "--pcheuristic", type="string", dest="pcheuristic", default="none", help="interaction mode: none, or weighted [default: %default]")
-    # parser.add_option("-s", "--split", type="string", dest="split", default="horn", help="interaction mode: base, or horn [default: %default]")
-    # parser.add_option("-d", "--print", action="store_true", dest="printsol", help="print solution to output")
-    # parser.add_option("-z", "--pc", action="store_true", dest="pc", help="path consistency only")
-    # parser.add_option("-t", "--trivial", action="store_true", dest="trivial", help="extra path consistency on the initial graph")
-    # parser.add_option("-e", "--heuristic", type="string", dest="heuristic", default="global", help="interaction mode: global, local, or none [default: %default]")
     parser.add_option("-f", "--file", action="store", type="string", dest="filename", default="size16-edges8-9QCNs-consistent")
     parser.add_option("-o", "--operator", action="store", type="string", dest="operator", default="crossConsB", help="crossConsA, crossConsB, crossConsC, crossConsD, crossVarsA, crossVarsB, or crossVarsC")
     parser.add_option("-p", "--cardP", action="store", type="int", dest="cardP", default=50)
@@ -108,6 +100,7 @@ def main(argv=None):
     all_cross_time = 0.0
     all_cross_num = 0
 
+    # initialize global variables
     setGlobals("timeout", timeout)
     setGlobals("process_total", 0.0)
     setGlobals("process_num", 0)
@@ -134,7 +127,7 @@ def main(argv=None):
             buffer.append(i)
 
             if i.strip() == '.':
-                globs["qcnNo"] += 1
+                globs["qcnNo"] += 1  # begin to read a new QCN
 
                 if "QCN-files/" in filename:
                     filename = filename[10:]
@@ -145,6 +138,7 @@ def main(argv=None):
                     else:
                         break
 
+                # if it is the first QCN
                 if globs["qcnNo"] == 1:
                     if operator == "crossConsC":
                         results_dir = "Results/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "-" + str(consC) + "/" 
@@ -157,6 +151,7 @@ def main(argv=None):
                         triangle_dir = "Triangulations/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "/"
                         inputQCN_dir = "Input_singleQCNs/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "/"
 
+                    # if the directory has not been created yet
                     if not os.path.exists(results_dir):
                         os.makedirs(results_dir)
                     if not os.path.exists(loopsInfo_dir):
@@ -166,25 +161,23 @@ def main(argv=None):
                     if not os.path.exists(inputQCN_dir) and options.singleFile:
                         os.makedirs(inputQCN_dir)
 
-                    # if options.singleFile:
-                    #     setGlobals("inputQCN_dir", inputQCN_dir)
-
+                # load the input QCN
                 TypeId, ConMatrix, ConMatrixS = init(buffer, inputQCN_dir, operator, options.singleFile)
 
                 
-                buffer = [] # example文件里的每一行是两个节点和它们之间的relation，计算两个节点的复合关系的数字，存入ConMatrix里
+                buffer = []
 
                 from triangulation import MCS, FIC
-                from bitcoding import B_dict
+                from helpfuncs import B_dict
                 
                 edjes = set([])
 
-                neighbors = tuple([set([]) for i in range(len(ConMatrix))]) #tuple里的每个元素是conmatrix每一行组成的set
+                neighbors = tuple([set([]) for i in range(len(ConMatrix))])
 
                 DALL = B_dict['DALL']
                 for i in range(len(ConMatrix)):
-                    for j in range(i+1,len(ConMatrix)): #conmatrix对角线右上方 (为了不重复遍历)
-                        if ConMatrix[i][j] != DALL: #如果不是全关系说明行和列对应的数字表示的节点是邻居
+                    for j in range(i+1,len(ConMatrix)):
+                        if ConMatrix[i][j] != DALL:
                             edjes.add((i,j))
                             neighbors[i].add(j)
                             neighbors[j].add(i)
@@ -197,9 +190,9 @@ def main(argv=None):
                 if (ppc(ConMatrix, neighbors)): #path consistency on the initial graph (partial)
                     
                     a, a_ = MCS(ConMatrix, neighbors)
-                    fill = FIC(ConMatrix, neighbors, a, a_) #找到所有的要加进去的边（为了把图变成chordal的
+                    fill = FIC(ConMatrix, neighbors, a, a_)  # find all edges need to be added
 
-                    neighbors = tuple([set([]) for i in range(len(ConMatrix))]) #哪一些变元是邻居，在chordal graph下
+                    neighbors = tuple([set([]) for i in range(len(ConMatrix))])  # find neighbors in the chordal graph
                     incident = [[] for i in range(len(ConMatrix))]
 
                     for i,j in fill:
@@ -210,21 +203,21 @@ def main(argv=None):
                         for n in i:
                             fills.append((n,m))
                             neighbors[m].add(n) 
-                            neighbors[n].add(m)
+                            neighbors[n].add(m)  # add neighbors
 
                     if options.triangle:
                         from outputtri import outputTriangulation
-                        outputTriangulation(TypeId, neighbors, triangle_dir, operator)
+                        outputTriangulation(TypeId, neighbors, triangle_dir, operator)  # output chordal graphs
 
                     if_except = 0
 
                     from eamqfunc import EAMQ
                     
                     try:
-                        print("QCN No.", globs["qcnNo"])
+                        print("QCN No.", globs["qcnNo"])  # output the QCN nubmer which is started to be processed
                         filename =  loopsInfo_dir + "LoopsInfo-" + str(globs["qcnNo"])
                         f = open(filename, "w")
-                        EAMQ(operator, ConMatrix, neighbors, cardP, cardBest, divT, loopsInfo_dir, f, consC)
+                        EAMQ(operator, ConMatrix, neighbors, cardP, cardBest, divT, loopsInfo_dir, f, consC)  # the main algorithm EAMQ
                         f.close()
                     except KeyboardInterrupt:
                         print("Interrupt")
@@ -232,15 +225,15 @@ def main(argv=None):
                         print("Exception: ", e)
                         if_except = 1
                     
-                    if if_except == 0:
-                        print("+++++++++++++++++++++++after calling EAMQ, globs shown below")
+                    if if_except == 0:  # if no exception is catched, record the data
+                        print("+++++++++++++++++++++++after calling EAMQ, global variables are shown below+++++++++++++++++++++++")
                         if "passT" in globs.keys():
                             globs['process_total'] += globs["passT"]
                             globs['process_num'] += 1
                         if "nbloops" in globs.keys():
                             globs["total_loops"] += globs["nbloops"]
                         print(globs)
-                        print("---------------------")
+                        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                         all_ppc_time += globs["ppc_total"]
                         all_ppc_num += globs["ppc_num"]
                         all_cross_time += globs["cross_total"]
@@ -257,75 +250,7 @@ def main(argv=None):
             total_time = time.clock() - start
             from outputInfo import outputInformation
             outputInformation(results_dir, operator, TypeId, timeout, cardP, cardBest, divT, total_time, all_ppc_time, all_ppc_num, all_cross_time, all_cross_num)
-        
-        
-        '''        
-        try:
-            EAMQ(operator, ConMatrix, neighbors, cardP, cardBest, divT)
-        except:
-            KeyboardInterrupt
-        '''
-        '''
-        EAMQ(operator, ConMatrix, neighbors, cardP, cardBest, divT)
-        print("+++++++++++++++++++++++after calling EAMQ, globs shown below")
-        print(globs)
-        print("---------------------")
-        '''
-        # 调试selectbest
-        '''
-        print("ConMatrix is -------------------------------")
-        print(ConMatrix)
-        C1 = (array('H', [1, 4409, 2014, 6174, 4026, 4317, 2834, 2526, 2111, 2008, 8191]), array('H', [2265, 1, 2589, 6687, 6800, 6859, 6940, 7607, 7484, 8023, 8191]), array('H', [1982, 5147, 1, 4615, 3678, 444, 7127, 7129, 7449, 5402, 8191]), array('H', [6174, 7199, 3079, 1, 5711, 5423, 1758, 7259, 6670, 4636, 8191]), array('H', [6108, 7432, 5694, 3639, 1, 3033, 3005, 6448, 5839, 6555, 8191]), array('H', [2363, 7477, 474, 2775, 5561, 1, 1343, 4554, 3470, 7947, 8191]), array('H', [5260, 7322, 7599, 1854, 5595, 735, 1, 2332, 4669, 2321, 8191]), array('H', [4542, 7119, 7609, 6717, 6344, 2484, 4250, 1, 2004, 7946, 8191]), array('H', [4191, 6874, 6809, 7190, 3895, 5014, 3163, 1962, 1, 1981, 8191]), array('H', [1976, 7855, 2716, 3098, 6557, 7829, 4233, 7828, 4, 1, 8191]), array('H', [8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 1]))
-        C2 = (array('H', [1, 4409, 2014, 6174, 4026, 4317, 2834, 2526, 2111, 2008, 8191]), array('H', [2265, 1, 2589, 6687, 6800, 6859, 6940, 7607, 7484, 8023, 8191]), array('H', [1982, 5147, 1, 4615, 3678, 444, 7127, 7129, 7449, 5402, 8191]), array('H', [6174, 7199, 3079, 1, 5711, 5423, 1758, 7259, 6670, 4636, 8191]), array('H', [6108, 7432, 5694, 3639, 1, 3033, 3005, 6448, 5839, 6555, 8191]), array('H', [2363, 7477, 474, 2775, 5561, 1, 1343, 4554, 3470, 7947, 8191]), array('H', [5260, 7322, 7599, 1854, 5595, 735, 1, 2332, 4669, 2321, 8191]), array('H', [4542, 7119, 7609, 6717, 6344, 2484, 4250, 1, 10, 7946, 8191]), array('H', [4191, 6874, 6809, 7190, 3895, 5014, 3163, 1962, 1, 1981, 8191]), array('H', [1976, 7855, 2716, 3098, 6557, 7829, 4233, 7828, 4, 1, 8191]), array('H', [8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 1]))
-        C3 = (array('H', [1, 4409, 2014, 6174, 4026, 4317, 2834, 2526, 2111, 2008, 8191]), array('H', [2265, 1, 2589, 6687, 6800, 6859, 6940, 7607, 7484, 8023, 8191]), array('H', [1982, 5147, 1, 4615, 3678, 444, 7127, 7129, 7449, 5402, 8191]), array('H', [6174, 7199, 3079, 1, 5711, 5423, 1758, 7259, 6670, 4636, 8191]), array('H', [6108, 7432, 5694, 3639, 1, 3033, 3005, 6448, 5839, 6555, 8191]), array('H', [2363, 7477, 474, 2775, 5561, 1, 1343, 4554, 3470, 7947, 8191]), array('H', [5260, 7322, 7599, 1854, 5595, 32, 1, 2332, 4669, 2321, 8191]), array('H', [4542, 7119, 7609, 6717, 6344, 2484, 4250, 1, 10, 7946, 8191]), array('H', [4191, 6874, 6809, 7190, 3895, 5014, 3163, 1962, 1, 1981, 8191]), array('H', [1976, 7855, 2716, 3098, 6557, 7829, 4233, 7828, 4, 1, 8191]), array('H', [8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 1]))
-        C4 = (array('H', [1, 4409, 32, 6174, 4026, 4317, 2834, 2526, 2111, 2008, 8191]), array('H', [2265, 1, 2589, 6687, 6800, 6859, 6940, 7607, 7484, 8023, 8191]), array('H', [1982, 5147, 1, 4615, 3678, 444, 7127, 7129, 7449, 5402, 8191]), array('H', [6174, 7199, 3079, 1, 5711, 5423, 1758, 7259, 6670, 4636, 8191]), array('H', [6108, 7432, 5694, 3639, 1, 3033, 3005, 6448, 5839, 6555, 8191]), array('H', [2363, 7477, 474, 2775, 5561, 1, 1343, 4554, 3470, 7947, 8191]), array('H', [5260, 7322, 7599, 1854, 5595, 32, 1, 2332, 4669, 2321, 8191]), array('H', [4542, 7119, 7609, 6717, 6344, 2484, 4250, 1, 10, 7946, 8191]), array('H', [4191, 6874, 6809, 7190, 3895, 5014, 3163, 1962, 1, 1981, 8191]), array('H', [1976, 7855, 2716, 3098, 6557, 7829, 4233, 7828, 4, 1, 8191]), array('H', [8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 8191, 1]))
-        from selectbest import selectBestScenarios
-        testset = []
-        testset.append(C4)
-        testset.append(C2)
-        testset.append(C3)
-        testset.append(C1)
-        resultlist = selectBestScenarios(ConMatrix, testset, 2)
-        print("result is -------------------")
-        for k in resultlist:
-            print(k)
-            print()
-        '''
 
-        # 调试crossvarsA
-        '''
-        from random_scenario import randomScenario
-        from exploreNeighbor import exploreNeighborhood
-        for k in range(2):
-            S = randomScenario(neighbors)
-            # print("S is -------------------------")
-            # print(S)
-            bestNg = exploreNeighborhood(ConMatrix, S, neighbors)
-            Sp.append(bestNg)
-            # print(bestNg)
-            # print()
-  
-        print("Neighbors of random scenarios are ----------------------------")
-        print(Sp[0])
-        print("and")
-        print(Sp[1])
-        from crossover import crossConsB
-        crossS = crossConsB(ConMatrix, neighbors, Sp[0], Sp[1])
-        print("crossS is -------------------------------")
-        print(crossS)
-        '''
-
-        # 调试EAMQ
-        '''
-        print(ConMatrix)
-        print("----------------------------")
-        from eamqfunc import EAMQ
-        result = EAMQ(ConMatrix, neighbors, 4, 2, 5, 5)
-        from outputRes import outputResult
-        outputResult(TypeId, result, neighbors)
-        print("-------------result--------------")
-        print(result)
-        '''
 
 if __name__ == '__main__':
    sys.exit(main())     

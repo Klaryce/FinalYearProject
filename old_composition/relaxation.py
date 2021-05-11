@@ -1,4 +1,4 @@
-from bitcoding import B_dict
+from helpfuncs import B_dict
 import copy
 
 def relax(S, v):

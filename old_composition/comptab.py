@@ -1,7 +1,5 @@
 from functools import reduce
-from bitcoding import B_dict
-from baserels import B
-from basesplit import bsplit
+from helpfuncs import B_dict, B, bsplit
 from glob import globs
 import time
 
