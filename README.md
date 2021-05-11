@@ -41,3 +41,5 @@ If the parameter -i is set, the folder Input_SingleQCNs will be created to conta
 In each folder, a folder named using the parameter -n will be created. Then, sub-directories named using configurations of QCNs, or parameters of the algorithm will be created to contain the results and information of corresponding QCNs.
 
 If a folder has been created already, it will not be created again. And the results will be put into it.
+
+There are different versions of the code package and the current package is the last one which changes the code structure a lot. Please contact the student immediately if the current version of the code package cannot run successfully. Many thanks.
