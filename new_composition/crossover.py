@@ -8,6 +8,7 @@ from selectbest import alpha
 import time
 
 def crossVarsA(N, neighbors, S1, S2):
+    startT = time.time()
     V1 = [i for i in range(len(N))]
     V2 = []
     while len(V1) > len(V2):
@@ -62,10 +63,14 @@ def crossVarsA(N, neighbors, S1, S2):
         # G-consistent
         ppc(S, neighbors) #path consistency on the initial graph (partial)
         
+    passT = time.time() - startT
+    globs["cross_total"] = globs["cross_total"] + passT
+    globs["cross_num"] += 1
     return S
 
 
 def crossVarsB(N, neighbors, S1, S2):
+    startT = time.time()
     V1 = [i for i in range(len(N))]
     V2 = []
     while len(V1) > len(V2):
@@ -134,9 +139,13 @@ def crossVarsB(N, neighbors, S1, S2):
         # G-consistent
         ppc(S, neighbors) #path consistency on the initial graph (partial)
         
+    passT = time.time() - startT
+    globs["cross_total"] = globs["cross_total"] + passT
+    globs["cross_num"] += 1
     return S
 
 def crossVarsC(N, neighbors, S1, S2):
+    startT = time.time()
     V1 = [i for i in range(len(N))]
     V2 = []
     for i in range(len(neighbors)):
@@ -196,6 +205,9 @@ def crossVarsC(N, neighbors, S1, S2):
         # G-consistent
         ppc(S, neighbors) #path consistency on the initial graph (partial)
         
+    passT = time.time() - startT
+    globs["cross_total"] = globs["cross_total"] + passT
+    globs["cross_num"] += 1
     return S
 
 def crossConsA(N, neighbors, S1, S2):
