@@ -20,7 +20,7 @@ Available parameters:
 
 -n: name of the experiment. String. Default: default. 
 
--c: the parameter c in operator crossConsC. Integer. Default: 7. 
+-c: the parameter c in the operator crossConsC. Integer. Default: 7. 
 
 -r: output chordal graphs. 
 
