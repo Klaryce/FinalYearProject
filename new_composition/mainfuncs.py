@@ -21,7 +21,7 @@ def init(buffer, inputQCN_dir, operator, otpt):
     N = fileLen("allen.relations")
     setGlobals("size", N)
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if N <= 8:
@@ -128,7 +128,7 @@ def main(argv=None):
             buffer.append(i)
 
             if i.strip() == '.':
-                globs["qcnNo"] += 1
+                globs["qcnNo"] += 1 # begin to read a new QCN
 
                 if "QCN-files/" in filename:
                     filename = filename[10:]
@@ -165,20 +165,19 @@ def main(argv=None):
                 # load the input QCN
                 TypeId, ConMatrix, ConMatrixS = init(buffer, inputQCN_dir, operator, options.singleFile)
 
-                
                 buffer = []
 
                 from triangulation import MCS, FIC
-                from bitcoding import B_dict
+                from helpfuncs import B_dict
                 
                 edjes = set([])
 
-                neighbors = tuple([set([]) for i in range(len(ConMatrix))]) #tuple里的每个元素是conmatrix每一行组成的set
+                neighbors = tuple([set([]) for i in range(len(ConMatrix))])
 
                 DALL = B_dict['DALL']
                 for i in range(len(ConMatrix)):
-                    for j in range(i+1,len(ConMatrix)): #conmatrix对角线右上方 (为了不重复遍历)
-                        if ConMatrix[i][j] != DALL: #如果不是全关系说明行和列对应的数字表示的节点是邻居
+                    for j in range(i+1,len(ConMatrix)):
+                        if ConMatrix[i][j] != DALL:
                             edjes.add((i,j))
                             neighbors[i].add(j)
                             neighbors[j].add(i)
@@ -213,7 +212,7 @@ def main(argv=None):
                     if_except = 0
 
                     from eamqfunc import EAMQ
-                    
+
                     try:
                         print("QCN No.", globs["qcnNo"])  # output the QCN nubmer which is started to be processed
                         filename =  loopsInfo_dir + "LoopsInfo-" + str(globs["qcnNo"])
@@ -227,14 +226,14 @@ def main(argv=None):
                         if_except = 1
                     
                     if if_except == 0:  # if no exception is catched, record the data
-                        print("+++++++++++++++++++++++after calling EAMQ, globs shown below")
+                        print("+++++++++++++++++++++++after calling EAMQ, global variables are shown below+++++++++++++++++++++++")
                         if "passT" in globs.keys():
                             globs['process_total'] += globs["passT"]
                             globs['process_num'] += 1
                         if "nbloops" in globs.keys():
                             globs["total_loops"] += globs["nbloops"]
                         print(globs)
-                        print("---------------------")
+                        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                         all_ppc_time += globs["ppc_total"]
                         all_ppc_num += globs["ppc_num"]
                         all_cross_time += globs["cross_total"]

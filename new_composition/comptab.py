@@ -1,11 +1,10 @@
 from functools import reduce
 import time
-from bitcoding import B_dict, B_dict_store
-from baserels import B
+from helpfuncs import B_dict, B_dict_store, B
 from glob import globs
 
 DALL = B_dict['DALL']
-N = 13
+N = globs["size"]
 
 # calculate and store compositions formed by base relations
 def start(i, fcomp):

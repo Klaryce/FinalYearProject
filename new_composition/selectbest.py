@@ -1,16 +1,14 @@
-from bitcoding import B_dict
+from helpfuncs import B_dict
 
 def alpha(N, S):
-    if len(N) != len(S):
+    if len(N) != len(S):  # two QCNs have different number of variables
         return -1
     summ = 0
     for i in range(len(N)):
         for j in range(len(N[i])):
-            #print("%d & %d = %d" % (N[i][j], S[i][j], N[i][j] & S[i][j]))
             if N[i][j] & S[i][j] == 0 and N[i][j] != B_dict["="]:
                 summ += 1
-                #print("summ is %d" % summ)
-    a = 0.5 * summ
+    a = 0.5 * summ  # each constraint is calculated twice
     return a
 
 def selectBestScenarios(N, SSet, n):
@@ -19,11 +17,7 @@ def selectBestScenarios(N, SSet, n):
         S = SSet[i]
         a = alpha(N, S)
         aList.append((S, a))
-    sorted_aList = sorted(aList, key=lambda x: x[1])
-    # print("sorted_aList is -----------------")
-    # for item_ in sorted_aList:
-    #     print(item_[1])
-    # print("-----------------------------")
+    sorted_aList = sorted(aList, key=lambda x: x[1])  # sort
     if n > len(SSet):
         n = len(SSet)
     SList = []

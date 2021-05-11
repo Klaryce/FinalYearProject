@@ -1,9 +1,8 @@
 import random
-from inverse import inv
 from ppc import pPC as ppc
 from array import array
 from glob import globs
-from helpfuncs import bitdecoding
+from helpfuncs import bitdecoding, inv
 from selectbest import alpha
 import time
 
@@ -18,7 +17,7 @@ def crossVarsA(N, neighbors, S1, S2):
 
     n = globs["size"]
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if n <= 8:
@@ -80,7 +79,7 @@ def crossVarsB(N, neighbors, S1, S2):
 
     n = globs["size"]
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if n <= 8:
@@ -160,7 +159,7 @@ def crossVarsC(N, neighbors, S1, S2):
 
     n = globs["size"]
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if n <= 8:
@@ -215,7 +214,7 @@ def crossConsA(N, neighbors, S1, S2):
     startT = time.time()
     n = globs["size"]
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if n <= 8:
@@ -274,7 +273,7 @@ def crossConsB(N, neighbors, S1, S2):
     startT = time.time()
     n = globs["size"]
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if n <= 8:
@@ -387,7 +386,7 @@ def crossConsC(N, neighbors, S1, S2, d):
     startT = time.time()
     n = globs["size"]
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if n <= 8:
@@ -514,7 +513,7 @@ def crossConsD(N, neighbors, S1, S2):
     startT = time.time()
     n = globs["size"]
     Id = 0
-    from bitcoding import B_dict
+    from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
     if n <= 8:

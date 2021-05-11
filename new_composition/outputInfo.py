@@ -1,7 +1,6 @@
 from __future__ import division
 import os
-from helpfuncs import bitdecoding
-from bitcoding import B_dict_reverse
+# from bitcoding import B_dict_reverse
 from glob import globs
 
 

@@ -35,8 +35,7 @@ def exit_after(s):
 
 
 def callback_func():
-    print('Time out')
-    print("------------")
+    print("------------Time out------------")
     thread.interrupt_main() # raises KeyboardInterrupt
 
 # the main algorithm EAMQ

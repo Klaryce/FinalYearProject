@@ -1,10 +1,8 @@
 import time
-from bitcoding import B_dict
-from inverse import inv
 from collections import deque
+from helpfuncs import B_dict, inv
 from comp_relations import complex_relations
 from glob import globs
-#from counters import counter
 
 DALL = B_dict['DALL']
 
@@ -29,65 +27,51 @@ def pPC(ConMatrix, neighbors):
        entry_finder.discard(task)
        return task
 
-   # initialize queue 
-   map(add_task,[(i,j) for i in range(Vars) for j in range(i+1,Vars) if ConMatrix[i][j] != DALL]) #每一对邻居
-
+   # initialize the queue
    for i in range(Vars):
       for j in range(i+1,Vars):
          if ConMatrix[i][j] != DALL:
             task = (i, j)
             add_task(task)
 
-   # print(pq)
    # as long as the queue is not empty, process it
-   #print("=================In ppc. before while=====================")
    while pq:
-      # print("enter while")
       (i,j) = pop_task() # grab the appropriate relation
-      # print(i, j)
-      #counter['arcs'] += 1 # increment visited arcs counter 
   
       # create all triplets to be checked for path consistency
-      for k in neighbors[i] & neighbors[j]: #对于节点i和节点j的每个共同邻居k
+      for k in neighbors[i] & neighbors[j]:  # for each common neighbors of i and j
 
-         temp = complex_relations(ConMatrix[k][i], ConMatrix[i][j]) #ij与jk的复合约束
-         #  temp = fcomp[ConMatrix[k][i]][ConMatrix[i][j]] #节点k和i之间的约束与节点i和j之间的约束的复合约束
+         temp = complex_relations(ConMatrix[k][i], ConMatrix[i][j])  # composition of ki and ij
          if temp != DALL:
 
-            #counter['cons'] += 1 # increment checked constraints counter
+            # constraint arc (k,i,j)
+            temp = temp & ConMatrix[k][j] # (ki comp ij) & kj
 
-            # constrain arc (k,i,j)
-            temp = temp & ConMatrix[k][j] #对kiij复合关系和kj之间的关系进行AND运算
-
-            if temp != ConMatrix[k][j]: #存在某个kj约束不在这个ki和ij的复合关系中
-               if not temp: # 如果kj关系和kiij复合关系完全不同
+            if temp != ConMatrix[k][j]:  # there is a relation in kj which is not in the composition of ki and ij
+               if not temp:  # kj and the composition of ki ij totally different
                   passT = time.time() - startT
                   globs["ppc_total"] += passT
                   globs["ppc_num"] += 1
-                  # print("false case 1, (k, i, j) is (%d, %d, %d)" % (k, i, j))
                   return False # inconsistency
-               ConMatrix[k][j] = temp #如果有重合，就把不重合的那些关系去掉
+               ConMatrix[k][j] = temp  # remove inconsistent relation
                ConMatrix[j][k] = inv(temp)
                if k < j:
-                   add_task((k, j)) #更新了k和j之间的约束之后再对k和j的共同邻居与它们之间的约束进行更新
+                   add_task((k, j))  # after updating the constraint of kj, update the constraint between their neighbors and them
                else:
                    add_task((j, k))
 
-         temp2 = complex_relations(ConMatrix[i][j], ConMatrix[j][k]) #ij与jk的复合约束
-         # print("two relations are %d, %d" % (ConMatrix[i][j], ConMatrix[j][k]))
+
+         temp2 = complex_relations(ConMatrix[i][j], ConMatrix[j][k])  # composition of ij and jk
 
          if temp2 != DALL:
 
-            #counter['cons'] += 1 # increment checked constraints counter
-         
-            # constrain arc (i,j,k) 
-            temp2 = temp2 & ConMatrix[i][k] #更新i和k之间的约束
+            # constraint arc (i,j,k) 
+            temp2 = temp2 & ConMatrix[i][k] 
             if temp2 != ConMatrix[i][k]:
                if not temp2:
                   passT = time.time() - startT
                   globs["ppc_total"] += passT
                   globs["ppc_num"] += 1
-                  # print("false case 2")
                   return False # inconsistency
                ConMatrix[i][k] = temp2
                ConMatrix[k][i] = inv(temp2)

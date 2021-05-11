@@ -1,8 +1,8 @@
-from bitcoding import B_dict, B_dict_reverse, B_dict_store
-from helpfuncs import bitdecoding
+# from bitcoding import B_dict, B_dict_reverse, B_dict_store
+from helpfuncs import B_dict, B_dict_reverse, B_dict_store, bitdecoding
 from comptab import fcomp
 
-# calculate compositions
+# # calculate compositions
 def complex_relations(i, j):
     ij = 0  # initialize the composition of the constraint i and the constraint j
 

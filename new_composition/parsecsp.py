@@ -1,14 +1,14 @@
 import sys
 import os
-from helpfuncs import translateR
-from inverse import inv
+from helpfuncs import translateR, inv
+# from inverse import inv
 from glob import globs
 from functools import reduce
 
 # parse spatial CSP and fill in the constraint matrix
 def parsecsp(ConMatrix, buffer, TypeId, Vars, otpt_dir, operator, otpt):
    
-   if otpt:
+   if otpt:  # output each input QCN to a single file
       filename =  otpt_dir + "InputQCN-" + operator + TypeId
       if not os.path.exists(otpt_dir):
          os.makedirs(otpt_dir)
