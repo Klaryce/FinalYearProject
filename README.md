@@ -27,7 +27,7 @@ Available parameters:
 -i: output each input QCN to a single file.
 
 
-The folder QCN-Files contains the input files of the algorithm. When using the -f command to specify a input file, the algorithm will search the filename within this folder. 
+The folder QCN-files contains the input files of the algorithm. When using the -f command to specify a input file, the algorithm will search the filename within this folder. 
 
 The algorithm will create a folder Results which contains the solutions and some information.
 
