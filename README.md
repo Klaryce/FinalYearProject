@@ -6,7 +6,7 @@ Enter the command "python mainfuncs.py" to run the code. The version of the code
 
 Available parameters:
 
--f: filename of the input QCNs. String. Default: size16-edges8-9QCNsconsistent.
+-f: filename of the input QCNs. String. Default: size16-edges8-9QCNs-consistent.
 
 -o: crossover operator. String. Default: crossConsB.
 
@@ -43,3 +43,5 @@ In each folder, a folder named using the parameter -n will be created. Then, sub
 If a folder has been created already, it will not be created again. And the results will be put into it.
 
 There are different versions of the code package and the current package is the last one where the code structure has been changed a lot. Please contact the student immediately if the current version of the code package cannot run successfully. Many thanks. Email: klaryce@qq.com.
+
+* Note that the running time may be much longer when the code is processed on a different computer, especially the pre-calculations in the original version of composition handling. If there is not enough time to wait for it, adding the argument "-f size8-edges4-1QCNs-consistent" may be helpful. The output results can be checked from the folder LoopsInfo and Results.
