@@ -250,6 +250,7 @@ def main(argv=None):
             total_time = time.clock() - start
             from outputInfo import outputInformation
             outputInformation(results_dir, operator, TypeId, timeout, cardP, cardBest, divT, total_time, all_ppc_time, all_ppc_num, all_cross_time, all_cross_num)
+            print("Please check the solutions and information from the corresponding folders referring to the README.txt.")
 
 
 if __name__ == '__main__':

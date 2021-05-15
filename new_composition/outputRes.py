@@ -26,16 +26,18 @@ def outputResult(results_dir, operator, TypeId, neighbors, timeout, cardP, cardB
         print("Average processing time: %f. (total processing time: %f, number of QCNs: %d)" % (process_ave, globs["process_total"], globs["process_num"]), file=f)
     if globs["ppc_num"] != 0:
         ppc_ave = globs["ppc_total"] / globs["ppc_num"]
-        print("ppc time in average: %f. (total time: %f, number: %d)" % (ppc_ave, globs["ppc_total"], globs["ppc_num"]), file=f)
+        print("Consistency checking time in average: %f. (total time: %f, number: %d)" % (ppc_ave, globs["ppc_total"], globs["ppc_num"]), file=f)
     if globs["cross_num"] != 0:
         cross_ave = globs["cross_total"] / globs["cross_num"]
-        print("crossover time in average: %f. (total time: %f, number: %d)" % (cross_ave, globs["cross_total"], globs["cross_num"]), file=f)
+        print("Crossover time in average: %f. (total time: %f, number: %d)" % (cross_ave, globs["cross_total"], globs["cross_num"]), file=f)
     if globs["explore_aftcross_num"] != 0:
         explore_aftcross_ave = globs["explore_aftcross_total"] / globs["explore_aftcross_num"]
         print("Neighbors exploring time in crossover step in average: %f. (total time: %f, number: %d)" % (explore_aftcross_ave, globs["explore_aftcross_total"], globs["explore_aftcross_num"]), file=f)
     if globs["fcomp_num"] != 0:
         fcomp_ave = globs["fcomp_total"] / globs["fcomp_num"]
-        print("fcomp time in average: %f. (total time: %f, number: %d)" % (fcomp_ave, globs["fcomp_total"], globs["fcomp_num"]), file=f)
+        print("Compositions pre-calcultion time in average: %f. (total time: %f, number: %d)" % (fcomp_ave, globs["fcomp_total"], globs["fcomp_num"]), file=f)
+    
+    print("Solution:", file=f)
 
     vnum = len(neighbors)
     vnum -= 2
