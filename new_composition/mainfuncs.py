@@ -214,6 +214,7 @@ def main(argv=None):
                     from eamqfunc import EAMQ
 
                     try:
+                        print()
                         print("QCN No.", globs["qcnNo"])  # output the QCN nubmer which is started to be processed
                         filename =  loopsInfo_dir + "LoopsInfo-" + str(globs["qcnNo"])
                         f = open(filename, "w")
@@ -226,14 +227,13 @@ def main(argv=None):
                         if_except = 1
                     
                     if if_except == 0:  # if no exception is catched, record the data
-                        print("+++++++++++++++++++++++after calling EAMQ, global variables are shown below+++++++++++++++++++++++")
+                        
                         if "passT" in globs.keys():
                             globs['process_total'] += globs["passT"]
                             globs['process_num'] += 1
                         if "nbloops" in globs.keys():
                             globs["total_loops"] += globs["nbloops"]
-                        print(globs)
-                        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
                         all_ppc_time += globs["ppc_total"]
                         all_ppc_num += globs["ppc_num"]
                         all_cross_time += globs["cross_total"]
