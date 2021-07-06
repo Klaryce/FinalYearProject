@@ -66,6 +66,7 @@ def main(argv=None):
     parser.add_option("-c", "--consC", action="store", type="int", dest="consC", default=7)
     parser.add_option("-i", "--singleFile", action="store_true", dest="singleFile")
     parser.add_option("-r", "--triangle", action="store_true", dest="triangle")
+    parser.add_option("-a", "--parent", action="store_true", dest="parent")
 
     # parse command line arguments
     options, args = parser.parse_args()
@@ -79,6 +80,7 @@ def main(argv=None):
     name = options.pname
     consC = options.consC
     setGlobals("otpt", options.singleFile)
+    setGlobals("otpt_parents", options.parent)
 
     if not os.access(filename, os.F_OK):
         print("File %s does not exist." % filename)
@@ -145,11 +147,15 @@ def main(argv=None):
                         loopsInfo_dir = "LoopsInfo/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "-" + str(consC) + "/"
                         triangle_dir = "Triangulations/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "-" + str(consC) + "/"
                         inputQCN_dir = "Input_singleQCNs/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "-" + str(consC) + "/"
+                        parents_dir = "Parents/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "-" + str(consC) + "/" 
                     else:
                         results_dir = "Results/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "/" 
                         loopsInfo_dir = "LoopsInfo/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "/"
                         triangle_dir = "Triangulations/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "/"
                         inputQCN_dir = "Input_singleQCNs/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "/"
+                        parents_dir = "Parents/" + str(name) + "/" + str(timeout) + "s-"  + str(cardP) + "-" + str(cardBest) + "-" + str(divT) + "/"+ fn + "/" + str(operator) + "/" 
+
+                    setGlobals('parents_dir', parents_dir)
 
                     # if the directory has not been created yet
                     if not os.path.exists(results_dir):
@@ -160,10 +166,12 @@ def main(argv=None):
                         os.makedirs(triangle_dir)
                     if not os.path.exists(inputQCN_dir) and options.singleFile:
                         os.makedirs(inputQCN_dir)
+                    if not os.path.exists(parents_dir) and options.parent:
+                        os.makedirs(parents_dir)
 
                 # load the input QCN
                 TypeId, ConMatrix, ConMatrixS = init(buffer, inputQCN_dir, operator, options.singleFile)
-
+                setGlobals("TypeId", TypeId)
                 
                 buffer = []
 
@@ -212,7 +220,14 @@ def main(argv=None):
                     if_except = 0
 
                     from eamqfunc import EAMQ
-                    
+                    '''
+                    print()
+                    print("QCN No.", globs["qcnNo"])  # output the QCN nubmer which is started to be processed
+                    filename =  loopsInfo_dir + "LoopsInfo-" + str(globs["qcnNo"])
+                    f = open(filename, "w")
+                    EAMQ(operator, ConMatrix, neighbors, cardP, cardBest, divT, loopsInfo_dir, f, consC)  # the main algorithm EAMQ
+                    f.close()
+                    '''
                     try:
                         print()
                         print("QCN No.", globs["qcnNo"])  # output the QCN nubmer which is started to be processed
@@ -225,6 +240,7 @@ def main(argv=None):
                     except Exception as e:
                         print("Exception: ", e)
                         if_except = 1
+                    
                     
                     if if_except == 0:  # if no exception is catched, record the data
 
@@ -243,15 +259,16 @@ def main(argv=None):
                         
                         from outputRes import outputResult
                         outputResult(results_dir, operator, TypeId, neighbors, timeout, cardP, cardBest, divT)
+                    
                 else:
                     print("Input QCN inconsistent: No.%d" % globs["qcnNo"])
-           
+
         if if_except == 0:
             total_time = time.clock() - start
             from outputInfo import outputInformation
             outputInformation(results_dir, operator, TypeId, timeout, cardP, cardBest, divT, total_time, all_ppc_time, all_ppc_num, all_cross_time, all_cross_num)
             print("Please check the solutions and information from the corresponding folders referring to the README.txt.")
-
+        
 
 if __name__ == '__main__':
    sys.exit(main())     

@@ -130,6 +130,10 @@ def EAMQ(operator, N, G, cardp, cardBest, divT, loopsInfo_dir, f, consC):
                 S2 = SBest[ran_best2]
                 ite_select_passT = time.time() - startT
 
+                if globs["otpt_parents"]:
+                    from outputPrt import outputParent
+                    outputParent(operator, G, S1, S2, nbloops)
+
                 if operator == "crossConsA":
                     S = crossConsA(N, G, S1, S2)
                 elif operator == "crossConsB":
