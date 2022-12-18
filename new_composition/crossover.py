@@ -216,7 +216,7 @@ def crossVarsC(N, neighbors, S1, S2):
 def crossConsA(N, neighbors, S1, S2):
     startT = time.time()
     n = globs["size"]
-    Id = 0
+    Id = 0f
     from helpfuncs import B_dict
     with open("allen.identity") as f:
         Id = B_dict[f.readline().strip()]
@@ -309,7 +309,6 @@ def crossConsB(N, neighbors, S1, S2):
     while unsele:  # while there exist unhandled edges
 
         if unsele_not0:  # if there exist some edges need to be handled which has common relation with the target QCN
-            print("unsele_not0")
             ran_e = random.randint(0, len(unsele_not0)-1) 
             u, v = unsele_not0[ran_e]
 
@@ -359,7 +358,6 @@ def crossConsB(N, neighbors, S1, S2):
                     unsele_not0.remove((i, j))
 
         elif unsele_0:  # if there exist some edges need to be handled
-            print("unsele_0")
             ran_e = random.randint(0, len(unsele_0)-1) 
             u, v = unsele_0[ran_e]
 
@@ -401,7 +399,6 @@ def crossConsB(N, neighbors, S1, S2):
                 print("Inconsistency occurs in crossConsB")
                 return None
 
-    print("----------------------after while----------------------")
     passT = time.time() - startT
     globs["cross_total"] = globs["cross_total"] + passT
     globs["cross_num"] += 1
@@ -453,9 +450,7 @@ def crossConsC(N, neighbors, S1, S2, d):
             unsele_not0.append((i, j))
 
     while unsele:  # while there exist unhandled edges
-
         if unsele_not0:  # if there exist some edges need to be handled which has common relation with the target QCN
-            print("unsele_not0")
             ran_e = random.randint(0, len(unsele_not0)-1)
             u, v = unsele_not0[ran_e]
 
@@ -506,7 +501,6 @@ def crossConsC(N, neighbors, S1, S2, d):
                     unsele_not0.remove((i, j))
     
         elif unsele_0:  # if there exist some edges need to be handled which has no common relation with the target QCN
-            print("unsele_0")
             ran_e = random.randint(0, len(unsele_0)-1) 
             u, v = unsele_0[ran_e]
 
@@ -549,7 +543,6 @@ def crossConsC(N, neighbors, S1, S2, d):
                 print("Inconsistency occurs in crossConsC")
                 return None
 
-    print("----------------------after while----------------------")
     passT = time.time() - startT
     globs["cross_total"] = globs["cross_total"] + passT
     globs["cross_num"] += 1
@@ -592,7 +585,6 @@ def crossConsD(N, neighbors, S1, S2):
     while unsele:  # while there exist unhandled edges
 
         if unsele_not0:  # if there exist some edges need to be handled which has common relation with the target QCN
-            print("unsele_not0")
             ran_e = random.randint(0, len(unsele_not0)-1) 
             u, v = unsele_not0[ran_e]
 
@@ -632,7 +624,6 @@ def crossConsD(N, neighbors, S1, S2):
                     unsele_not0.remove((i, j))
     
         elif unsele_0: 
-            print("unsele_0")
             ran_e = random.randint(0, len(unsele_0)-1) 
             u, v = unsele_0[ran_e]
             
@@ -666,7 +657,6 @@ def crossConsD(N, neighbors, S1, S2):
                 print("Inconsistency occurs in crossConsD")
                 return None
 
-    print("----------------------after while----------------------")
     passT = time.time() - startT
     globs["cross_total"] = globs["cross_total"] + passT
     globs["cross_num"] += 1
