@@ -10,7 +10,7 @@ This is the final year project of the author's bachelor's degree. Thank Professo
 
 (3) The new composition handling processes pre-calculation in a new way. It only pre-calculates the binary composition of basic relations so that the matrix is 13 by 13 instead of 2^13 by 2^13 in the original version.
 
-(4) The new crossover operator (crossConsC and crossConsD) has been proposed. A new parameter -c is introduced to control crossConsC (the optimal value of -c is 7, which has been set to be default).
+(4) The new crossover operator (crossConsC and crossConsD) has been proposed. A new parameter -c is introduced to control crossConsC.
   
 	a). Modified based on crossConsB.
   
