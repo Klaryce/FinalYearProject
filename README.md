@@ -21,10 +21,10 @@ This is the final year project of the author's bachelor's degree. Thank Professo
 ![image](https://user-images.githubusercontent.com/45749073/225372356-0f59745f-2855-48b9-8c4a-dd11abcaab7a.png)
 
 <img src="https://user-images.githubusercontent.com/45749073/225385051-671b9707-b818-4946-b920-d37789caee46.png" width="600px">
-<img src="https://user-images.githubusercontent.com/45749073/225372185-e574f2f9-8c00-4c02-bb39-7b0615a015cb.png" width="500px">
+<img src="https://user-images.githubusercontent.com/45749073/225372185-e574f2f9-8c00-4c02-bb39-7b0615a015cb.png" width="400px">
 
 <img src="https://user-images.githubusercontent.com/45749073/225385284-0752c83b-d3be-44a4-9ea7-6a0d4760811a.png" width="600px">
-<img src="https://user-images.githubusercontent.com/45749073/225372266-fc3b0a01-82d2-4329-831e-81243d5fe8e8.png" width="500px">
+<img src="https://user-images.githubusercontent.com/45749073/225372266-fc3b0a01-82d2-4329-831e-81243d5fe8e8.png" width="400px">
 
 ![image](https://user-images.githubusercontent.com/45749073/225372786-88268836-4c92-40a5-a7e2-c1292ebc2d64.png)
 
