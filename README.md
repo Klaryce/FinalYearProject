@@ -1,5 +1,7 @@
 # FinalYearProject
 
+The content below was updated in 2023.
+
 This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis for his auxiliary code (below in 1) and the code for consistency checking (ppc.py). The contribution is fourfold.
 
 (1) The auxiliary code structure has been reorganized (helpfuncs.py, glob.py, inverse.py, parsecsp.py).
