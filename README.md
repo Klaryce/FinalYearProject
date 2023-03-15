@@ -1,15 +1,35 @@
 # FinalYearProject
 
-This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis for his auxiliary code and the code for consistency checking. The contribution is fourfold.
+This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis for his auxiliary code (below in 1) and the code for consistency checking (ppc.py). The contribution is fourfold.
 
-(1) The auxiliary code structure has been reorganized.
+(1) The auxiliary code structure has been reorganized (helpfuncs.py, glob.py, inverse.py, parsecsp.py).
 
 (2) The algorithm from https://dl.acm.org/doi/abs/10.1145/3200947.3201021 has been reproduced.
 
 (3) The new composition handling processes pre-calculation in a new way. It only pre-calculates the binary composition of basic relations so that the matrix is 13 by 13 instead of 2^13 by 2^13 in the original version.
 
 (4) The new crossover operator (crossConsC and crossConsD) has been proposed. A new parameter -c is introduced to control crossConsC (the optimal value of -c is 7, which has been set to be default).
+  
+	a). Modified based on crossConsB.
+  
+	b). crossConsC considers the better QCN more often.
+  
+	c). crossConsD considers the first input QCN more often.
+  
 
+
+![image](https://user-images.githubusercontent.com/45749073/225372356-0f59745f-2855-48b9-8c4a-dd11abcaab7a.png)
+
+<img src="https://user-images.githubusercontent.com/45749073/225369669-f2707a83-feac-4f31-b9cb-8abe7823b19f.png" width="600px">
+<img src="https://user-images.githubusercontent.com/45749073/225372185-e574f2f9-8c00-4c02-bb39-7b0615a015cb.png" width="500px">
+
+<img src="https://user-images.githubusercontent.com/45749073/225381546-b5170b5b-5e66-4886-b6b5-dc5754193c9c.png" width="600px">
+
+<img src="https://user-images.githubusercontent.com/45749073/225372266-fc3b0a01-82d2-4329-831e-81243d5fe8e8.png" width="500px">
+
+![image](https://user-images.githubusercontent.com/45749073/225372786-88268836-4c92-40a5-a7e2-c1292ebc2d64.png)
+
+<img src="https://user-images.githubusercontent.com/45749073/225376099-caf06b4c-1eef-4137-84af-954ddcf57c6f.png" width="500px">
 
 
 -----------------------------------------------------------------------------
