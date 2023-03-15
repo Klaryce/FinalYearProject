@@ -32,6 +32,16 @@ This is the final year project of the author's bachelor's degree. Thank Professo
 
 <img src="https://user-images.githubusercontent.com/45749073/225376099-caf06b4c-1eef-4137-84af-954ddcf57c6f.png" width="500px">
 
+**Motivation of the Improvement on Crossover Operators**
+
+All three new crossovers operators change the way of assigning $S_x$ and $S_y$ to $S_1$ and $S_2$ in crossConsB. Firstly the operator crossConsB will be reviewed again in the view of the inheritance from two parents. Then the idea to create crossConsC and crossConsD will be explained comparing with crossConsB.
+
+The constraint of an edge in a scenario needs to be a singleton relation. However, as all constraints in the child QCN is initialized as the universe relation $B$ in crossConsB, there must exist some $(v, v') \in E$ and $|S[v, v']|>1$ which should be singleton relations. In each iteration, the constraint of such a pair $v, v'$ is handled. When selecting the singleton constraint for it, the operator always considers $S_\text{1}$ in priority, and only considers $S_\text{2}$ if the constraint in $S_\text{1}$ does not meet the requirement. Therefore, in each iteration where a new pair $v, v'$ is selected, $S[v, v']$ tends more likely to be assigned with the constraint $S_\text{1}[v, v']$ rather than $S_\text{2}[v, v']$. However, in crossConsB, the two parent QCNs are assigned to $S_\text{1}$ and $S_\text{2}$ randomly, which means that in general cases, around half of the constraints in $S$ will come from $S_\text{1}$, whereas the other half will come from $S_\text{2}$. Although both $S_\text{1}$ and $S_{\text{2}}$ are $_G^\diamond$\- consistent, their combinations may be not. 
+
+When designing the operator crossConsC, it is analyzed that focusing on the better scenario more often rather than picking them randomly may increase the performance. However, focusing on one scenario which is not necessarily the best one may also increase the performance. Moreover, if the result of choosing the second better scenario is not worse than choosing the best one, then the comparison of the two scenarios, and all operations for reassigning $S_\text{1}$ and $S_\text{2}$ in each iteration can only waste time. In addition, although in each iteration there might be different parents passed to crossConsC, since there is still a probability that some parents are repeatedly selected in different iterations, it means that the relatively better scenarios among the best individuals tend to be considered much more often. Based on these points of view, crossConsD is come up with.
+
+Concisely, both two methods lose some extent of diversification for the sake of a faster speed of convergence. This is because the diversification and the convergence speed always check and balance. The introduction of diversification will increase the possibility to obtain global minimality, since some better elements are likely to be found. However, it is also more likely to get worse elements and generate a worse result. Therefore, it is a trade-off to prevent the diversification from influencing the convergence speed while avoiding obtaining the local minimality.
+
 -----------------------------------------------------------------------------
 
 The content below was updated in June 2021.
