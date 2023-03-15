@@ -10,7 +10,7 @@ This is the final year project of the author's bachelor's degree. Thank Professo
 
 (1) The auxiliary code has been reorganized (helpfuncs.py, glob.py, inverse.py, parsecsp.py).
 
-(2) The algorithm from https://dl.acm.org/doi/abs/10.1145/3200947.3201021 has been reproduced.
+(2) The evolutionary algorithm EAMQ from https://dl.acm.org/doi/abs/10.1145/3200947.3201021 has been reproduced.
 
 (3) The new composition handling processes pre-calculation in a new way. It only pre-calculates the binary composition of basic relations so that the matrix is 13 by 13 instead of 2^13 by 2^13 in the original version.
 
