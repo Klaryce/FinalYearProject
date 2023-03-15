@@ -25,6 +25,9 @@ This is the final year project of the author's bachelor's degree. Thank Professo
 
 
 ![image](https://user-images.githubusercontent.com/45749073/225372356-0f59745f-2855-48b9-8c4a-dd11abcaab7a.png)
+	
+<img src="https://user-images.githubusercontent.com/45749073/225396349-adbad5c0-7d30-4554-ac53-127a2642da4c.png" width="600px">
+<img src="https://user-images.githubusercontent.com/45749073/225396039-59b6aae7-0fbb-4d4d-8346-509a5e31f701.png" width="400px">
 
 <img src="https://user-images.githubusercontent.com/45749073/225385051-671b9707-b818-4946-b920-d37789caee46.png" width="600px">
 <img src="https://user-images.githubusercontent.com/45749073/225372185-e574f2f9-8c00-4c02-bb39-7b0615a015cb.png" width="400px">
