@@ -8,7 +8,7 @@ The readme content below was updated in 2023 (figures were produced in June 2021
 
 This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis for providing the auxiliary code (below in (1)) and the code for consistency checking (ppc.py). The contribution is fourfold.
 
-(1) The auxiliary code structure has been reorganized (helpfuncs.py, glob.py, inverse.py, parsecsp.py).
+(1) The auxiliary code has been reorganized (helpfuncs.py, glob.py, inverse.py, parsecsp.py).
 
 (2) The algorithm from https://dl.acm.org/doi/abs/10.1145/3200947.3201021 has been reproduced.
 
