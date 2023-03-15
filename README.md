@@ -1,5 +1,9 @@
 # FinalYearProject
 
+Maximizing Satisfiability of Qualitative Constraint Networks (QCNs)
+
+Keywords: Qualitative Spatial and Temporal Reasoning (QSTR), evolutionary algorithm
+
 The content below was updated in 2023.
 
 This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis for his auxiliary code (below in 1) and the code for consistency checking (ppc.py). The contribution is fourfold.
@@ -32,7 +36,7 @@ This is the final year project of the author's bachelor's degree. Thank Professo
 
 <img src="https://user-images.githubusercontent.com/45749073/225376099-caf06b4c-1eef-4137-84af-954ddcf57c6f.png" width="500px">
 
-**Motivation of the Improvement on Crossover Operators**
+**Motivation of the Improvement on Crossover Operators (June 2021)**
 
 All three new crossovers operators change the way of assigning $S_x$ and $S_y$ to $S_1$ and $S_2$ in crossConsB. Firstly the operator crossConsB will be reviewed again in the view of the inheritance from two parents. Then the idea to create crossConsC and crossConsD will be explained comparing with crossConsB.
 
