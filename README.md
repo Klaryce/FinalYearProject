@@ -4,7 +4,7 @@ Maximizing Satisfiability of Qualitative Constraint Networks (QCNs)
 
 Keywords: Qualitative Spatial and Temporal Reasoning (QSTR), evolutionary algorithm
 
-The content below was updated in 2023.
+The readme content below was updated in 2023 (figures were produced in June 2021).
 
 This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis for his auxiliary code (below in 1) and the code for consistency checking (ppc.py). The contribution is fourfold.
 
