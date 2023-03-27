@@ -56,7 +56,7 @@ The content below was updated in May 2021.
 
 The folder new_composition is the code package using the new version of composition handling, while the old_composition is the code package using the original (old) version of compositin handling.
 
-Enter the command "python mainfuncs.py" to run the code. The version of the code is Python 3. The command "python 3" is expected to be used if the default version of the command "python" is 2.
+Enter the command *python mainfuncs.py* to run the code. The Python version of the code is 3. The command *python3* is expected to be used if the default version of Python is 2.
 
 
 Available parameters:
@@ -99,4 +99,4 @@ If a folder has been created already, it will not be created again. And the resu
 
 There are different versions of the code package and the current package is the last one where the code structure has been changed a lot. Please contact the author immediately if the current version of the code package cannot run successfully. Many thanks. Contact: klarycehappy@gmail.com.
 
-Note that the running time may be much longer when the code is processed on a different computer, especially the pre-calculations in the original version of composition handling. If there is not enough time to wait for the new version to process large QCNs, adding the argument "-f size8-edges4-1QCNs-consistent" may be helpful. The output results can be checked from the folder LoopsInfo and Results.
+Note that the running time may be much longer when the code is processed on a different computer, especially the pre-calculations in the original version of composition handling. If there is not enough time to wait for the new version to process large QCNs, adding the argument *-f size8-edges4-1QCNs-consistent* may be helpful. The output results can be checked from the folder LoopsInfo and Results.
