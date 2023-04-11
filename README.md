@@ -18,9 +18,9 @@ This is the final year project of the author's bachelor's degree. Thank Professo
   
 	a). Modified based on crossConsB.
   
-	b). crossConsC considers the better QCN more often.
+	b). crossConsC prefers the better parent QCN.
   
-	c). crossConsD considers the first input QCN more often.
+	c). crossConsD prefers the first input parent QCN.
   
 
 ![image](https://user-images.githubusercontent.com/45749073/225372356-0f59745f-2855-48b9-8c4a-dd11abcaab7a.png)
