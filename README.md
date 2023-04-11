@@ -2,7 +2,7 @@
 
 Maximizing Satisfiability of Qualitative Constraint Networks (QCNs)
 
-Keywords: Qualitative Spatial and Temporal Reasoning (QSTR), evolutionary algorithm
+Keywords: Qualitative Spatial and Temporal Reasoning (QSTR), Constraint Satisfaction Problem (CSP), evolutionary algorithm
 
 README updated in 2023 (figures were produced in May 2021).
 
