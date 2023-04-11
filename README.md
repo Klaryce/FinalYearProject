@@ -6,7 +6,7 @@ Keywords: Qualitative Spatial and Temporal Reasoning (QSTR), Constraint Satisfac
 
 README updated in 2023 (figures were produced in May 2021).
 
-This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis for providing the auxiliary code (below in (1)) and the code for consistency checking (ppc.py). The contribution is fourfold.
+This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis and Dr Zhiguo Long for providing the auxiliary code (below in (1)) and the code for consistency checking (ppc.py). The contribution is fourfold.
 
 (1) Reorganized the auxiliary code (helpfuncs.py, glob.py, inverse.py, parsecsp.py).
 
