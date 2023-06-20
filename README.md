@@ -6,9 +6,9 @@ Keywords: Qualitative Spatial and Temporal Reasoning (QSTR), Constraint Satisfac
 
 README updated in 2023 (figures were produced in May 2021).
 
-This is the final year project of the author's bachelor's degree. Thank Professor Michael Sioutis and Dr Zhiguo Long for providing the auxiliary code (below in (1)) and the code for consistency checking (ppc.py). The contribution is fourfold.
+This is the final year project of the author's bachelor's degree. The contribution is fourfold.
 
-(1) Reorganized the auxiliary code (helpfuncs.py, glob.py, inverse.py, parsecsp.py).
+(1) Reorganized the auxiliary code. *
 
 (2) Reproduced the evolutionary algorithm EAMQ https://dl.acm.org/doi/abs/10.1145/3200947.3201021 .
 
@@ -100,3 +100,7 @@ If a folder has been created already, it will not be created again. And the resu
 There are different versions of the code package and the current package is the last one where the code structure has been changed a lot. Please contact the author immediately if the current version of the code package cannot run successfully. Many thanks. Contact: klarycehappy@gmail.com.
 
 Note that the running time may be much longer when the code is processed on a different computer, especially the pre-calculations in the original version of composition handling. If there is not enough time to wait for the new version to process large QCNs, adding the argument *-f size8-edges4-1QCNs-consistent* may be helpful. The output results can be checked from the folder LoopsInfo and Results.
+
+---
+
+ \* Thank Professor Michael Sioutis and Dr Zhiguo Long for providing the auxiliary code (helpfuncs.py, glob.py, inverse.py, parsecsp.py) and the code for consistency checking (ppc.py). 
